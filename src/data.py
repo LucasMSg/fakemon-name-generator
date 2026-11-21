@@ -1,5 +1,4 @@
 import re
-import string
 import torch
 from pathlib import Path
 
@@ -21,24 +20,22 @@ for names in treated_data:
             vocabulary.append(c)
 
 vocabulary.sort()
-print(vocabulary)
+vocabulary = ['.'] + vocabulary
 
-chart_to_id = {char: i for i, char in enumerate(vocabulary)}
+chat_to_id = {char: i for i, char in enumerate(vocabulary)}
 id_to_char = dict(enumerate(vocabulary))
-print(chart_to_id)
-print(id_to_char)
 
 #Write an encode(name) function that returns a tensor of IDs, and a decode(tensor) function that turns it back into a string.
-def encode(name: string) -> torch.tensor:
+def encode(name: str) -> torch.Tensor:
     ids = []
     for c in name:
-        ids.append(chart_to_id[c])
+        ids.append(chat_to_id[c])
         
     return torch.tensor(ids)
     
-print(encode("pikachu"))
 
-def decode(tensor: torch.tensor) -> string:
+
+def decode(tensor: torch.Tensor) -> str:
     name = ""
     ids = tensor.tolist()
     for i in ids:
@@ -46,4 +43,9 @@ def decode(tensor: torch.tensor) -> string:
         
     return name
 
-print(decode(encode("pikachu")))
+if __name__ == "__main__":
+    print("vocabulary size:", len(vocabulary))
+    encodechu = encode(".pikachu")
+    print(encodechu)
+    print(encodechu.dtype)
+    print(decode(encodechu))
