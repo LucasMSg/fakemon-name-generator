@@ -22,14 +22,14 @@ for names in treated_data:
 vocabulary.sort()
 vocabulary = ['.'] + vocabulary
 
-chat_to_id = {char: i for i, char in enumerate(vocabulary)}
+char_to_id = {char: i for i, char in enumerate(vocabulary)}
 id_to_char = dict(enumerate(vocabulary))
 
 #Write an encode(name) function that returns a tensor of IDs, and a decode(tensor) function that turns it back into a string.
 def encode(name: str) -> torch.Tensor:
     ids = []
     for c in name:
-        ids.append(chat_to_id[c])
+        ids.append(char_to_id[c])
         
     return torch.tensor(ids)
     
